@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOROS | Luxury Timepieces</title>
+<meta name="description" content="HOROS — hand-assembled Swiss timepieces since 1924. Men's, women's, smart and limited edition collections.">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts: Cormorant Garamond + Jost + IBM Plex Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+          sans: ['Jost', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+        colors: {
+          paper:    { 50:'#F7F5EF', 100:'#F1EFE9', 200:'#EAE6DA' },
+          porcelain:'#FBF9F3',
+          ink:      { 900:'#1B1912', 700:'#33302A', 500:'#6E6A5E', 300:'#A9A496' },
+          lacquer:  { 400:'#C14E42', 500:'#A82E24', 600:'#8C221A' },
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-padding-top: 92px; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #F1EFE9; }
+  ::-webkit-scrollbar-thumb { background: #C7C2B2; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #A82E24; }
+
+  /* ---------- Eyebrow label ---------- */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .8rem;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    letter-spacing: .35em; text-transform: uppercase;
+    color: #8C221A; font-weight: 500;
+  }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: #A82E24; }
+
+  /* ---------- Header ---------- */
+  #siteHeader {
+    position: fixed; inset-x:0; top:0; z-index: 60;
+    background: rgba(241,239,233,.86);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(27,25,18,.08);
+  }
+  #siteHeader.scrolled { background: rgba(241,239,233,.97); }
+  .topbar { max-height: 40px; overflow: hidden; transition: max-height .45s ease; }
+  #siteHeader.scrolled .topbar { max-height: 0; }
+  .nav-row { padding-top: 1rem; padding-bottom: 1rem; transition: padding .35s ease; }
+  #siteHeader.scrolled .nav-row { padding-top: .55rem; padding-bottom: .55rem; }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: -6px; height: 1px;
+    width: 0; background: #A82E24; transition: width .3s ease;
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+  .nav-link.active { color: #A82E24; }
+
+  /* ---------- Buttons ---------- */
+  .btn-ink, .btn-line {
+    display: inline-flex; align-items: center; justify-content: center; gap: .65rem;
+    padding: 1rem 2.1rem; border-radius: 4px; cursor: pointer;
+    font-family: Jost, sans-serif; font-weight: 600; font-size: 11px;
+    letter-spacing: .22em; text-transform: uppercase; transition: all .3s ease;
+  }
+  .btn-ink { background: #1B1912; color: #F7F5EF; }
+  .btn-ink:hover { background: #A82E24; transform: translateY(-1px); }
+  .btn-ink:disabled { opacity: .7; cursor: wait; transform: none; }
+  .btn-line { background: transparent; border: 1px solid rgba(27,25,18,.3); color: #1B1912; }
+  .btn-line:hover { border-color: #1B1912; background: #FBF9F3; }
+  .btn-add {
+    display: inline-flex; align-items: center; gap: .5rem; cursor: pointer;
+    padding: .55rem 1rem; border-radius: 4px; border: 1px solid rgba(27,25,18,.22);
+    font-family: Jost; font-weight: 600; font-size: 9.5px; letter-spacing: .22em;
+    text-transform: uppercase; color: #1B1912; background: transparent; transition: all .25s ease;
+  }
+  .btn-add:hover { background: #1B1912; border-color: #1B1912; color: #F7F5EF; }
+
+  /* ---------- Fields ---------- */
+  .field {
+    width: 100%; padding: .85rem 1rem; background: #FBF9F3;
+    border: 1px solid rgba(27,25,18,.16); border-radius: 8px;
+    color: #1B1912; font-size: .9rem; font-family: Jost; outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+  .field::placeholder { color: #A9A496; }
+  .field:focus { border-color: #A82E24; box-shadow: 0 0 0 3px rgba(168,46,36,.12); }
+  .nl-field {
+    width: 100%; padding: .8rem 1rem; background: rgba(247,245,239,.06);
+    border: 1px solid rgba(247,245,239,.25); border-radius: 4px;
+    color: #F7F5EF; font-size: .85rem; font-family: Jost; outline: none; transition: all .25s;
+  }
+  .nl-field::placeholder { color: rgba(247,245,239,.4); }
+  .nl-field:focus { border-color: #A82E24; }
+
+  /* ---------- Scroll reveals ---------- */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+    will-change: opacity, transform;
+  }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Catalog card entrance ---------- */
+  @keyframes cardIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .card-enter { animation: cardIn .5s cubic-bezier(.16,1,.3,1) both; }
+  .flash-card { box-shadow: 0 0 0 2px #A82E24 !important; border-color: #A82E24 !important; }
+
+  /* ---------- Category tiles ---------- */
+  .cat-tile.cat-active { border-color: #A82E24 !important; box-shadow: 0 0 0 1px #A82E24; }
+
+  /* ---------- Badge & heart pops ---------- */
+  @keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.4); } 100% { transform: scale(1); } }
+  .pop { animation: pop .35s ease; }
+
+  /* ---------- Tick rail (scroll position) ---------- */
+  .rail-tick { width: 8px; height: 1px; background: rgba(27,25,18,.28); }
+  .rail-tick.major { width: 16px; height: 2px; background: rgba(27,25,18,.5); }
+
+  /* ---------- Drawer & modals ---------- */
+  #drawer { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+  #drawer.open { transform: translateX(0); }
+  #drawerOverlay { transition: opacity .4s ease; }
+
+  .modal { position: fixed; inset: 0; z-index: 85; display: grid; place-items: center; padding: 1.5rem; }
+  .modal.topmode { place-items: start center; padding-top: 7rem; }
+  .modal .m-backdrop { position: absolute; inset: 0; background: rgba(27,25,18,.45); opacity: 0; transition: opacity .3s ease; }
+  .modal .m-panel { position: relative; opacity: 0; transform: translateY(18px) scale(.98); transition: all .4s cubic-bezier(.16,1,.3,1); }
+  .modal.open .m-backdrop { opacity: 1; }
+  .modal.open .m-panel { opacity: 1; transform: none; }
+  .modal.closed { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-enter { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+
+<body class="bg-paper-100 text-ink-700 font-sans antialiased overflow-x-clip selection:bg-lacquer-500 selection:text-paper-50">
+
+<!-- ===================== HEADER ===================== -->
+<header id="siteHeader">
+  <!-- Announcement bar with live time -->
+  <div class="topbar border-b border-ink-900/8">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between py-2.5 font-mono text-[9.5px] tracking-[0.3em] uppercase text-ink-500">
+      <span>Geneva Atelier — Est. 1924</span>
+      <span class="hidden sm:block">Local time <span id="topClock" class="text-ink-900 font-medium">--:--:--</span></span>
+    </div>
+  </div>
+
+  <div class="nav-row max-w-6xl mx-auto px-6 flex items-center justify-between">
+    <a href="#home" class="font-display font-semibold text-[22px] tracking-[0.32em] text-ink-900 leading-none">
+      HOROS<span class="inline-block w-[5px] h-[5px] bg-lacquer-500 ml-1.5 align-baseline"></span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-9 font-medium uppercase text-[10.5px] tracking-[0.22em] text-ink-500">
+      <a href="#home" class="nav-link hover:text-ink-900 transition-colors">Home</a>
+      <a href="#collections" class="nav-link hover:text-ink-900 transition-colors">Collections</a>
+      <a href="#featured" class="nav-link hover:text-ink-900 transition-colors">Featured</a>
+      <a href="#about" class="nav-link hover:text-ink-900 transition-colors">About</a>
+      <a href="#contact" class="nav-link hover:text-ink-900 transition-colors">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-1.5">
+      <button id="searchBtn" class="relative w-10 h-10 rounded-full grid place-items-center text-ink-700 hover:text-lacquer-600 transition-colors" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass text-[13px]"></i>
+      </button>
+      <button id="userBtn" class="relative w-10 h-10 rounded-full grid place-items-center text-ink-700 hover:text-lacquer-600 transition-colors" aria-label="Client account">
+        <i class="fa-regular fa-user text-[13px]"></i>
+        <span id="userDot" class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-lacquer-500 hidden"></span>
+      </button>
+      <button id="wishBtn" class="relative w-10 h-10 rounded-full grid place-items-center text-ink-700 hover:text-lacquer-600 transition-colors" aria-label="Wishlist">
+        <i class="fa-regular fa-heart text-[13px]"></i>
+        <span id="wishBadge" class="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-lacquer-500 text-paper-50 font-mono text-[9px] grid place-items-center hidden">0</span>
+      </button>
+      <button id="bagBtn" class="relative w-10 h-10 rounded-full grid place-items-center text-ink-700 hover:text-lacquer-600 transition-colors" aria-label="Shopping bag">
+        <i class="fa-solid fa-bag-shopping text-[13px]"></i>
+        <span id="bagBadge" class="absolute -top-0.5 -right-0.5 min-w-[16px] h-[16px] px-1 rounded-full bg-lacquer-500 text-paper-50 font-mono text-[9px] grid place-items-center hidden">0</span>
+      </button>
+      <button id="mobileMenuBtn" class="md:hidden w-10 h-10 rounded-full grid place-items-center text-ink-700" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars text-sm" id="menuToggleIcon"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer nav -->
+  <div id="mobileDrawer" class="hidden md:hidden px-6 pt-2 pb-7 bg-paper-100/97 border-b border-ink-900/10 backdrop-blur-xl">
+    <div class="flex flex-col gap-4 font-medium uppercase text-[11px] tracking-[0.22em] text-ink-700">
+      <a href="#home" class="mobile-nav-link py-2 hover:text-lacquer-600">Home</a>
+      <a href="#collections" class="mobile-nav-link py-2 hover:text-lacquer-600">Collections</a>
+      <a href="#featured" class="mobile-nav-link py-2 hover:text-lacquer-600">Featured</a>
+      <a href="#about" class="mobile-nav-link py-2 hover:text-lacquer-600">About</a>
+      <a href="#contact" class="mobile-nav-link py-2 hover:text-lacquer-600">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- Left tick rail: scroll position as a minute track -->
+<div id="tickRail" class="hidden xl:flex fixed left-0 top-28 bottom-28 w-12 z-40 flex-col items-center justify-center gap-[9px] cursor-pointer" aria-hidden="true">
+  <span id="railMarker" class="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-lacquer-500 rotate-45 shadow-[0_0_0_3px_rgba(241,239,233,0.9)]" style="top:0%"></span>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section id="home" class="relative pt-40 lg:pt-44 pb-20 overflow-hidden">
+  <!-- Construction rings behind the watch -->
+  <div class="pointer-events-none absolute right-[-160px] top-1/2 -translate-y-1/2 hidden lg:block">
+    <div class="w-[560px] h-[560px] rounded-full border border-ink-900/10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="w-[760px] h-[760px] rounded-full border border-ink-900/8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="w-[960px] h-[960px] rounded-full border border-ink-900/6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-14 lg:gap-10 items-center">
+
+    <div class="lg:col-span-7">
+      <div class="reveal" data-delay="60">
+        <span class="eyebrow">Haute Horlogerie — Gen&egrave;ve</span>
+      </div>
+
+      <h1 class="reveal mt-7 font-display font-semibold text-ink-900 text-[3.7rem] leading-[0.95] sm:text-7xl xl:text-[6.4rem] tracking-[-0.01em]" data-delay="150">
+        Defining<br>
+        <span class="italic font-medium">Elegance</span><span class="text-lacquer-500">.</span>
+      </h1>
+
+      <p class="reveal mt-7 max-w-lg text-base sm:text-lg font-light leading-relaxed" data-delay="280">
+        Discover our limited edition luxury collection — every movement hand-assembled
+        and regulated in the Geneva atelier, as it has been since 1924.
+      </p>
+
+      <div class="reveal mt-10 flex flex-col sm:flex-row gap-4" data-delay="400">
+        <a href="#collections" class="btn-ink">Shop Now <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+        <a href="#about" class="btn-line">Our Heritage</a>
+      </div>
+    </div>
+
+    <!-- Live watch -->
+    <div class="lg:col-span-5 reveal" data-delay="220">
+      <div id="watchStage" class="max-w-[420px] mx-auto lg:mx-auto">
+        <div id="watchWrap" class="transition-transform duration-200 will-change-transform">
+          <svg id="watchSvg" viewBox="0 0 400 400" class="w-full h-auto drop-shadow-[0_30px_44px_rgba(27,25,18,0.22)]" role="img" aria-label="HOROS watch showing the current local time">
+            <circle cx="200" cy="200" r="197" fill="#1B1912"/>
+            <circle cx="200" cy="200" r="190" fill="#EAE6DA"/>
+            <circle cx="200" cy="200" r="182" fill="#FBF9F3" stroke="rgba(27,25,18,0.2)" stroke-width="1"/>
+            <g id="gTicks"></g>
+            <g id="gIdx"></g>
+            <text x="200" y="130" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="26" letter-spacing="6" fill="#1B1912">HOROS</text>
+            <text x="200" y="150" text-anchor="middle" font-family="Jost, sans-serif" font-size="9" letter-spacing="4" fill="#6E6A5E">GEN&#200;VE</text>
+            <text x="200" y="288" text-anchor="middle" font-family="Jost, sans-serif" font-size="8" letter-spacing="3.5" fill="#A9A496">AUTOMATIQUE</text>
+            <g id="hourHand"><polygon points="195,206 195,104 200,92 205,104 205,206" fill="#1B1912"/></g>
+            <g id="minHand"><polygon points="196.5,206 196.5,72 200,58 203.5,72 203.5,206" fill="#1B1912"/></g>
+            <g id="secHand">
+              <polygon points="199.3,206 199.3,58 200,47 200.7,58 200.7,238" fill="#A82E24"/>
+              <circle cx="200" cy="228" r="7" fill="#A82E24"/>
+            </g>
+            <circle cx="200" cy="200" r="6.5" fill="#1B1912"/>
+            <circle cx="200" cy="200" r="2.6" fill="#A82E24"/>
+          </svg>
+        </div>
+        <p class="mt-6 text-center font-mono text-[10px] tracking-[0.28em] uppercase text-ink-300">
+          Cal. H·1924 — <span id="heroClock" class="text-ink-900 font-medium">--:--:--</span> · running live
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spec strip -->
+  <div class="max-w-6xl mx-auto px-6 mt-16 lg:mt-20">
+    <div class="reveal grid grid-cols-2 lg:grid-cols-4 border-t border-ink-900/15" data-delay="520">
+      <div class="pt-6 pr-6 lg:border-r border-ink-900/12">
+        <p class="font-mono text-[9px] tracking-[0.3em] uppercase text-lacquer-600">01 — Swiss Made</p>
+        <p class="mt-2 text-[13px] font-light text-ink-700">Certified in the Canton of Geneva</p>
+      </div>
+      <div class="pt-6 px-6 lg:border-r border-ink-900/12">
+        <p class="font-mono text-[9px] tracking-[0.3em] uppercase text-lacquer-600">02 — Hand-Assembled</p>
+        <p class="mt-2 text-[13px] font-light text-ink-700">120 hours of finishing per calibre</p>
+      </div>
+      <div class="pt-6 px-6 lg:border-r border-ink-900/12">
+        <p class="font-mono text-[9px] tracking-[0.3em] uppercase text-lacquer-600">03 — Five-Year Warranty</p>
+        <p class="mt-2 text-[13px] font-light text-ink-700">Honoured internationally</p>
+      </div>
+      <div class="pt-6 pl-6">
+        <p class="font-mono text-[9px] tracking-[0.3em] uppercase text-lacquer-600">04 — Limited Series</p>
+        <p class="mt-2 text-[13px] font-light text-ink-700">Every piece individually numbered</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NEW ARRIVALS ===================== -->
+<section id="featured" class="py-24 lg:py-28">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-5 border-b border-ink-900/15 pb-7 mb-12">
+      <div>
+        <span class="eyebrow">No. 01 — The Maison</span>
+        <h2 class="mt-4 font-display text-4xl sm:text-5xl font-semibold text-ink-900">New Arrivals</h2>
+      </div>
+      <a href="#collections" class="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-ink-500 hover:text-lacquer-600 transition-colors">
+        View all pieces <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </a>
+    </div>
+
+    <div id="featuredGrid" class="grid lg:grid-cols-3 gap-6 lg:gap-7"></div>
+  </div>
+</section>
+
+<!-- ===================== COLLECTIONS ===================== -->
+<section id="collections" class="py-24 lg:py-28 bg-porcelain border-y border-ink-900/10">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="reveal flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-12">
+      <div>
+        <span class="eyebrow">No. 02 — The Collection</span>
+        <h2 class="mt-4 font-display text-4xl sm:text-5xl font-semibold text-ink-900">Our Collections</h2>
+      </div>
+      <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-300">07 pieces — restocked monthly</p>
+    </div>
+
+    <div id="catTiles" class="reveal grid grid-cols-2 lg:grid-cols-4 gap-5" data-delay="100">
+      <button class="cat-tile group text-left bg-paper-50 border border-ink-900/12 rounded-[10px] overflow-hidden hover:border-ink-900/35 transition-all duration-300" data-cat="men">
+        <div class="h-32 sm:h-36 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600" alt="Men's watches" loading="lazy" draggable="false" class="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700">
+        </div>
+        <div class="p-4 sm:p-5 flex items-center justify-between gap-3">
+          <div>
+            <p class="font-mono text-[9px] tracking-[0.25em] uppercase text-lacquer-600">I. — 03 pieces</p>
+            <h3 class="font-display text-lg sm:text-xl font-semibold text-ink-900 mt-1">Men&rsquo;s</h3>
+          </div>
+          <span class="w-9 h-9 shrink-0 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 group-hover:bg-ink-900 group-hover:text-paper-50 group-hover:border-ink-900 transition-all">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </button>
+
+      <button class="cat-tile group text-left bg-paper-50 border border-ink-900/12 rounded-[10px] overflow-hidden hover:border-ink-900/35 transition-all duration-300" data-cat="women">
+        <div class="h-32 sm:h-36 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1580226223521-5412ec88237a?auto=format&fit=crop&q=80&w=600" alt="Women's watches" loading="lazy" draggable="false" class="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700">
+        </div>
+        <div class="p-4 sm:p-5 flex items-center justify-between gap-3">
+          <div>
+            <p class="font-mono text-[9px] tracking-[0.25em] uppercase text-lacquer-600">II. — 02 pieces</p>
+            <h3 class="font-display text-lg sm:text-xl font-semibold text-ink-900 mt-1">Women&rsquo;s</h3>
+          </div>
+          <span class="w-9 h-9 shrink-0 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 group-hover:bg-ink-900 group-hover:text-paper-50 group-hover:border-ink-900 transition-all">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </button>
+
+      <button class="cat-tile group text-left bg-paper-50 border border-ink-900/12 rounded-[10px] overflow-hidden hover:border-ink-900/35 transition-all duration-300" data-cat="smart">
+        <div class="h-32 sm:h-36 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1660844817855-3ecc7ef21f12?auto=format&fit=crop&q=80&w=600" alt="Smart watches" loading="lazy" draggable="false" class="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700">
+        </div>
+        <div class="p-4 sm:p-5 flex items-center justify-between gap-3">
+          <div>
+            <p class="font-mono text-[9px] tracking-[0.25em] uppercase text-lacquer-600">III. — 01 piece</p>
+            <h3 class="font-display text-lg sm:text-xl font-semibold text-ink-900 mt-1">Smart</h3>
+          </div>
+          <span class="w-9 h-9 shrink-0 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 group-hover:bg-ink-900 group-hover:text-paper-50 group-hover:border-ink-900 transition-all">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </button>
+
+      <button class="cat-tile group text-left bg-paper-50 border border-ink-900/12 rounded-[10px] overflow-hidden hover:border-ink-900/35 transition-all duration-300" data-cat="limited">
+        <div class="h-32 sm:h-36 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1704783512705-a943b9ebe66f?auto=format&fit=crop&q=80&w=600" alt="Limited edition watches" loading="lazy" draggable="false" class="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700">
+        </div>
+        <div class="p-4 sm:p-5 flex items-center justify-between gap-3">
+          <div>
+            <p class="font-mono text-[9px] tracking-[0.25em] uppercase text-lacquer-600">IV. — 01 piece</p>
+            <h3 class="font-display text-lg sm:text-xl font-semibold text-ink-900 mt-1">Limited Edition</h3>
+          </div>
+          <span class="w-9 h-9 shrink-0 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 group-hover:bg-ink-900 group-hover:text-paper-50 group-hover:border-ink-900 transition-all">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Filter state -->
+    <div id="filterLine" class="reveal mt-12 mb-6 flex items-center justify-between gap-4" data-delay="160">
+      <p class="font-mono text-[10px] tracking-[0.22em] uppercase text-ink-500">
+        Showing <span id="filterCount" class="text-ink-900 font-medium">07</span> — <span id="filterLabel">All collections</span>
+      </p>
+      <button id="filterReset" class="hidden font-mono text-[10px] uppercase tracking-[0.22em] font-medium text-lacquer-600 hover:text-lacquer-400">Reset &times;</button>
+    </div>
+
+    <div id="catalogGrid" class="reveal grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6" data-delay="220"></div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="py-24 lg:py-32">
+  <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+
+    <div class="lg:col-span-5 reveal relative pb-8 lg:pb-0">
+      <div class="bg-porcelain border border-ink-900/12 rounded-[12px] p-3 shadow-[0_24px_50px_-30px_rgba(27,25,18,0.4)]">
+        <img src="https://images.unsplash.com/photo-1535484305382-556d4487b33d?auto=format&fit=crop&q=80&w=900" alt="Watchmaker assembling a movement" loading="lazy" draggable="false" class="w-full h-[380px] sm:h-[460px] lg:h-[520px] object-cover rounded-[8px]">
+      </div>
+      <div class="absolute -bottom-2 -left-3 sm:-left-6 bg-porcelain border border-ink-900/15 rounded-[10px] px-5 py-4 shadow-lg rotate-[-1.5deg]">
+        <p class="font-mono text-[9px] tracking-[0.3em] uppercase text-lacquer-600">Calibre H·1924</p>
+        <p class="font-display italic text-lg text-ink-900 mt-1">120 hours of hand-finishing</p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7 lg:pl-4">
+      <div class="reveal" data-delay="80">
+        <span class="eyebrow">No. 03 — Our Heritage</span>
+        <h2 class="mt-5 font-display text-3xl sm:text-5xl font-semibold text-ink-900 leading-[1.08]">
+          More than timekeepers —<br><span class="italic font-medium text-lacquer-600">legacies.</span>
+        </h2>
+      </div>
+
+      <div class="reveal mt-7 space-y-5 max-w-xl text-sm sm:text-base font-light leading-relaxed" data-delay="160">
+        <p>Since 1924, HOROS has been at the forefront of horological excellence. Our watches
+        are more than just timekeepers; they are legacies passed down through generations.</p>
+        <p>Every gear and spring is hand-assembled in our atelier to ensure perfection. We combine
+        traditional Swiss craftsmanship with modern technological precision to create pieces that
+        withstand the test of time.</p>
+      </div>
+
+      <div class="reveal grid grid-cols-3 gap-6 mt-10 border-t border-dashed border-ink-900/25 pt-7" data-delay="240">
+        <div>
+          <h3 class="font-display text-3xl font-semibold text-ink-900">1924</h3>
+          <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-300 mt-2">Founded in Geneva</p>
+        </div>
+        <div>
+          <h3 class="font-display text-3xl font-semibold text-ink-900">120<span class="text-lacquer-500">h</span></h3>
+          <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-300 mt-2">Per calibre</p>
+        </div>
+        <div>
+          <h3 class="font-display text-3xl font-semibold text-ink-900">48</h3>
+          <p class="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-300 mt-2">Artisans</p>
+        </div>
+      </div>
+
+      <blockquote class="reveal mt-10 border-l-2 border-lacquer-500 pl-6" data-delay="300">
+        <p class="font-display italic text-xl sm:text-2xl text-ink-700 leading-relaxed">
+          &ldquo;A watch is the only jewel that asks something of you daily.&rdquo;
+        </p>
+        <cite class="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-300 not-italic mt-3 block">&mdash; &Eacute;mile Horos, Founder</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="py-24 lg:py-28 bg-porcelain border-y border-ink-900/10">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="reveal border-b border-ink-900/15 pb-7 mb-12">
+      <span class="eyebrow">No. 04 — Concierge</span>
+      <h2 class="mt-4 font-display text-4xl sm:text-5xl font-semibold text-ink-900">Get in Touch</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <div class="lg:col-span-7 reveal">
+        <form id="contactForm" class="bg-paper-50 border border-ink-900/12 rounded-[12px] p-7 sm:p-9 space-y-6" novalidate>
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label for="cfName" class="block mb-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-ink-500">Name</label>
+              <input id="cfName" type="text" required autocomplete="name" placeholder="Alexander Pierce" class="field">
+            </div>
+            <div>
+              <label for="cfEmail" class="block mb-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-ink-500">Email</label>
+              <input id="cfEmail" type="email" required autocomplete="email" placeholder="you@example.com" class="field">
+            </div>
+          </div>
+          <div>
+            <label for="cfMsg" class="block mb-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-ink-500">Your message</label>
+            <textarea id="cfMsg" rows="5" required placeholder="Enquire about a piece, a valuation, or a private viewing&hellip;" class="field resize-none"></textarea>
+          </div>
+          <button id="contactSubmit" type="submit" class="btn-ink w-full">Send Message</button>
+          <p class="text-center font-mono text-[9px] uppercase tracking-[0.25em] text-ink-300">We reply within one business day</p>
+        </form>
+      </div>
+
+      <div class="lg:col-span-5 reveal" data-delay="140">
+        <h3 class="font-display text-2xl font-semibold text-ink-900">Contact Info</h3>
+        <div class="mt-8 space-y-7">
+          <div class="flex items-center gap-5">
+            <div class="w-11 h-11 shrink-0 rounded-[10px] bg-lacquer-500/8 border border-lacquer-500/25 text-lacquer-600 grid place-items-center text-sm">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-300">Direct line</p>
+              <p class="mt-1 text-sm font-medium text-ink-900">+1 (234) 567-890</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="w-11 h-11 shrink-0 rounded-[10px] bg-lacquer-500/8 border border-lacquer-500/25 text-lacquer-600 grid place-items-center text-sm">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-300">Email</p>
+              <p class="mt-1 text-sm font-medium text-ink-900">concierge@horos.com</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="w-11 h-11 shrink-0 rounded-[10px] bg-lacquer-500/8 border border-lacquer-500/25 text-lacquer-600 grid place-items-center text-sm">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-300">Salon</p>
+              <p class="mt-1 text-sm font-medium text-ink-900">5th Avenue, New York, NY</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="w-11 h-11 shrink-0 rounded-[10px] bg-lacquer-500/8 border border-lacquer-500/25 text-lacquer-600 grid place-items-center text-sm">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+            <div>
+              <p class="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-300">Private viewings</p>
+              <p class="mt-1 text-sm font-medium text-ink-900">Mon &ndash; Sat · by appointment</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-ink-900 text-paper-50 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <p class="font-display font-semibold text-2xl tracking-[0.32em]">HOROS<span class="inline-block w-[5px] h-[5px] bg-lacquer-500 ml-1.5 align-baseline"></span></p>
+        <p class="font-display italic text-lg text-paper-50/70 mt-4">Time, inherited.</p>
+        <p class="font-mono text-[9.5px] uppercase tracking-[0.3em] text-paper-50/35 mt-5">Cal. H·1924 — Gen&egrave;ve</p>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.3em] text-paper-50/50">Quick Links</h4>
+        <ul class="mt-5 space-y-3 text-sm font-light">
+          <li><a href="#home" class="hover:text-lacquer-400 transition-colors">Home</a></li>
+          <li><a href="#collections" class="hover:text-lacquer-400 transition-colors">Collections</a></li>
+          <li><a href="#about" class="hover:text-lacquer-400 transition-colors">About Us</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.3em] text-paper-50/50">Support</h4>
+        <ul class="mt-5 space-y-3 text-sm font-light">
+          <li><button class="info-link hover:text-lacquer-400 transition-colors" data-info="care">Watch Care</button></li>
+          <li><button class="info-link hover:text-lacquer-400 transition-colors" data-info="privacy">Privacy Policy</button></li>
+          <li><button class="info-link hover:text-lacquer-400 transition-colors" data-info="terms">Terms of Service</button></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-4">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.3em] text-paper-50/50">Join Our Newsletter</h4>
+        <p class="mt-5 text-sm font-light text-paper-50/70">Subscribe for exclusive offers and first access to limited series.</p>
+        <form id="nlForm" class="mt-5 flex gap-3">
+          <input id="nlInput" type="email" placeholder="your@email.com" class="nl-field" aria-label="Email address">
+          <button type="submit" id="nlBtn" class="shrink-0 px-6 rounded-[4px] border border-paper-50/30 font-semibold text-[10px] uppercase tracking-[0.22em] hover:bg-lacquer-500 hover:border-lacquer-500 transition-all">Join</button>
+        </form>
+        <p id="nlMsg" class="mt-3 font-mono text-[9.5px] tracking-[0.15em] text-lacquer-400"></p>
+      </div>
+    </div>
+
+    <div class="border-t border-paper-50/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-[11px] tracking-wide text-paper-50/45">&copy;2026 WebNova Studio | RR Web Designers. All rights reserved.</p>
+      <p class="font-mono text-[9px] uppercase tracking-[0.35em] text-paper-50/30">MMXXVI — Gen&egrave;ve</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== CART / WISHLIST DRAWER ===================== -->
+<div id="drawerOverlay" class="fixed inset-0 bg-ink-900/45 backdrop-blur-[2px] z-[70] opacity-0 pointer-events-none"></div>
+<aside id="drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-porcelain z-[75] translate-x-full flex flex-col shadow-2xl" role="dialog" aria-label="Bag and wishlist">
+  <div class="flex items-center justify-between px-6 pt-6 pb-5 border-b border-ink-900/12">
+    <div class="flex gap-6">
+      <button id="tabCart" class="drawer-tab font-mono text-[10px] uppercase tracking-[0.22em] text-ink-500 pb-1 border-b-2 border-transparent transition-colors">Bag — 0</button>
+      <button id="tabWish" class="drawer-tab font-mono text-[10px] uppercase tracking-[0.22em] text-ink-500 pb-1 border-b-2 border-transparent transition-colors">Saved — 0</button>
+    </div>
+    <button id="drawerClose" class="w-9 h-9 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 hover:text-lacquer-600 hover:border-lacquer-500/50 transition-colors" aria-label="Close">
+      <i class="fa-solid fa-xmark text-xs"></i>
+    </button>
+  </div>
+  <div id="drawerBody" class="flex-1 overflow-y-auto px-6 py-4"></div>
+  <div id="drawerFoot" class="px-6 py-6 border-t border-ink-900/12"></div>
+</aside>
+
+<!-- ===================== SEARCH MODAL ===================== -->
+<div id="searchModal" class="modal topmode closed" role="dialog" aria-label="Search">
+  <div class="m-backdrop" data-close></div>
+  <div class="m-panel w-full max-w-2xl bg-porcelain border border-ink-900/12 rounded-[12px] shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-4 px-6 py-5 border-b border-ink-900/12">
+      <i class="fa-solid fa-magnifying-glass text-lacquer-600 text-sm"></i>
+      <input id="searchInput" type="text" placeholder="Search the collection&hellip;" autocomplete="off" class="flex-1 bg-transparent outline-none font-display text-xl sm:text-2xl text-ink-900 placeholder:text-ink-300">
+      <button class="search-close w-8 h-8 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 hover:text-lacquer-600 transition-colors" aria-label="Close search"><i class="fa-solid fa-xmark text-xs"></i></button>
+    </div>
+    <div id="searchResults" class="max-h-[55vh] overflow-y-auto p-3"></div>
+  </div>
+</div>
+
+<!-- ===================== ACCOUNT MODAL ===================== -->
+<div id="accountModal" class="modal closed" role="dialog" aria-label="Client access">
+  <div class="m-backdrop" data-close></div>
+  <div class="m-panel w-full max-w-sm bg-porcelain border border-ink-900/12 rounded-[12px] shadow-2xl p-8">
+    <div class="flex items-start justify-between">
+      <div>
+        <span class="eyebrow">Client Access</span>
+        <h3 class="font-display text-2xl font-semibold text-ink-900 mt-3">Welcome back.</h3>
+      </div>
+      <button class="account-close w-8 h-8 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 hover:text-lacquer-600 transition-colors" aria-label="Close"><i class="fa-solid fa-xmark text-xs"></i></button>
+    </div>
+    <form id="accountForm" class="mt-7 space-y-5">
+      <div>
+        <label class="block mb-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-ink-500">Email</label>
+        <input id="accEmail" type="email" required placeholder="you@example.com" class="field">
+      </div>
+      <div>
+        <label class="block mb-2 font-mono text-[9.5px] uppercase tracking-[0.22em] text-ink-500">Password</label>
+        <input id="accPass" type="password" required placeholder="••••••••" class="field">
+      </div>
+      <button id="accSubmit" type="submit" class="btn-ink w-full">Sign In</button>
+      <p class="text-center font-mono text-[8.5px] uppercase tracking-[0.25em] text-ink-300">Private client portal — Concierge service</p>
+    </form>
+  </div>
+</div>
+
+<!-- ===================== INFO MODAL ===================== -->
+<div id="infoModal" class="modal closed" role="dialog" aria-label="Information">
+  <div class="m-backdrop" data-close></div>
+  <div class="m-panel w-full max-w-lg bg-porcelain border border-ink-900/12 rounded-[12px] shadow-2xl p-8 max-h-[80vh] overflow-y-auto">
+    <div class="flex items-start justify-between gap-6">
+      <h3 id="infoTitle" class="font-display text-2xl font-semibold text-ink-900"></h3>
+      <button class="info-close w-8 h-8 shrink-0 rounded-full border border-ink-900/15 grid place-items-center text-ink-500 hover:text-lacquer-600 transition-colors" aria-label="Close"><i class="fa-solid fa-xmark text-xs"></i></button>
+    </div>
+    <div id="infoBody" class="mt-6 space-y-4 text-sm font-light leading-relaxed text-ink-700"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[95] transition-all duration-400 opacity-0 translate-y-6 pointer-events-none">
+  <div class="bg-ink-900 text-paper-50 pl-4 pr-6 py-3.5 rounded-full flex items-center gap-3.5 shadow-2xl">
+    <span class="w-6 h-6 shrink-0 rounded-full bg-lacquer-500 grid place-items-center"><i class="fa-solid fa-check text-[10px]"></i></span>
+    <p id="toastMsg" class="text-sm font-medium whitespace-nowrap">Added to your bag</p>
+  </div>
+</div>
+
+<!-- ===================== SCRIPT ===================== -->
+<script>
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+
+  /* ---------------- Catalog data ---------------- */
+  const PRODUCTS = [
+    { id:'chrono-s',  name:'The Chrono S',    ref:'HS·2401', price:1200, cat:'men',     isNew:true, blurb:'Tachymeter chronograph · 41mm steel',   img:'https://images.unsplash.com/photo-1767009951305-5ed35f62e3c3?q=80&w=700&auto=format&fit=crop' },
+    { id:'moonphase', name:'Moonphase Gold',  ref:'HS·1908', price:2500, cat:'women',   isNew:true, blurb:'Rose gold · moonphase aperture',        img:'https://plus.unsplash.com/premium_photo-1760377691998-5e60d8182ef0?q=80&w=700&auto=format&fit=crop' },
+    { id:'oceanic',   name:'Oceanic Diver',   ref:'HS·0300', price:950,  cat:'men',     isNew:true, blurb:'300m resistance · ceramic bezel',       img:'https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&q=80&w=700' },
+    { id:'meridian',  name:'Meridian Classic',ref:'HS·2255', price:1450, cat:'men',     isNew:false,blurb:'Hand-wound · 38mm silver dial',         img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=700' },
+    { id:'eclat',     name:'Éclat Automatic', ref:'HS·6612', price:1850, cat:'women',   isNew:false,blurb:'Mother-of-pearl dial · 34mm',           img:'https://images.unsplash.com/photo-1580226223521-5412ec88237a?auto=format&fit=crop&q=80&w=700' },
+    { id:'pulse',     name:'Pulse Horizon',   ref:'HS·9000', price:780,  cat:'smart',   isNew:false,blurb:'Titanium case · 21-day battery',        img:'https://images.unsplash.com/photo-1660844817855-3ecc7ef21f12?auto=format&fit=crop&q=80&w=700' },
+    { id:'calibre1',  name:'Calibre One',     ref:'HS·0001', price:3900, cat:'limited', isNew:false,blurb:'Skeletonized · 50 pieces worldwide',     img:'https://images.unsplash.com/photo-1704783512705-a943b9ebe66f?auto=format&fit=crop&q=80&w=700' },
+  ];
+  const CATS = {
+    men:     { label:"Men's" },
+    women:   { label:"Women's" },
+    smart:   { label:'Smart' },
+    limited: { label:'Limited Edition' },
+  };
+  const byId = id => PRODUCTS.find(p => p.id === id);
+  const money = n => '$' + n.toLocaleString('en-US');
+
+  /* ---------------- State (persisted) ---------------- */
+  let cart = {}, wish = new Set();
+  try {
+    cart = JSON.parse(localStorage.getItem('horos-cart') || '{}');
+    wish = new Set(JSON.parse(localStorage.getItem('horos-wish') || '[]'));
+  } catch (e) {}
+  function save() {
+    try {
+      localStorage.setItem('horos-cart', JSON.stringify(cart));
+      localStorage.setItem('horos-wish', JSON.stringify([...wish]));
+    } catch (e) {}
+  }
+  const cartCount = () => Object.values(cart).reduce((a, b) => a + b, 0);
+
+  /* ---------------- Toast ---------------- */
+  const toast = $('#toast'), toastMsg = $('#toastMsg');
+  let toastTimer = null;
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.remove('opacity-0', 'translate-y-6');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-6'), 3200);
+  }
+
+  /* ---------------- Live watch (the signature) ---------------- */
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (n, attrs) => { const e = document.createElementNS(NS, n); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+
+  (function buildDial() {
+    const gT = $('#gTicks'), gI = $('#gIdx');
+    for (let i = 0; i < 60; i++) {
+      const major = i % 5 === 0, a = i * 6 * Math.PI / 180;
+      const r1 = 172, r2 = major ? 156 : 165;
+      gT.appendChild(mk('line', {
+        x1: 200 + r1 * Math.sin(a), y1: 200 - r1 * Math.cos(a),
+        x2: 200 + r2 * Math.sin(a), y2: 200 - r2 * Math.cos(a),
+        stroke: major ? '#1B1912' : '#A9A496', 'stroke-width': major ? 3 : 1.1,
+      }));
+    }
+    for (let i = 0; i < 12; i++) {
+      if (i === 0) { // double baton at 12
+        gI.appendChild(mk('rect', { x: 190.5, y: 40, width: 5.5, height: 26, fill: '#1B1912' }));
+        gI.appendChild(mk('rect', { x: 204, y: 40, width: 5.5, height: 26, fill: '#1B1912' }));
+      } else {
+        gI.appendChild(mk('rect', { x: 196.5, y: 40, width: 7, height: 26, fill: '#1B1912', transform: `rotate(${i * 30} 200 200)` }));
+      }
+    }
+  })();
+
+  const hourHand = $('#hourHand'), minHand = $('#minHand'), secHand = $('#secHand');
+  const topClock = $('#topClock'), heroClock = $('#heroClock');
+  let lastT = '';
+  function updateWatch() {
+    const now = new Date();
+    const s = now.getSeconds() + now.getMilliseconds() / 1000;
+    const m = now.getMinutes() + s / 60;
+    const h = now.getHours() % 12 + m / 60;
+    secHand.setAttribute('transform',  `rotate(${s * 6} 200 200)`);
+    minHand.setAttribute('transform',  `rotate(${m * 6} 200 200)`);
+    hourHand.setAttribute('transform', `rotate(${h * 30} 200 200)`);
+    const t = now.toTimeString().slice(0, 8);
+    if (t !== lastT) { lastT = t; topClock.textContent = t; heroClock.textContent = t; }
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    updateWatch(); setInterval(updateWatch, 1000);
+  } else {
+    (function loop() { updateWatch(); requestAnimationFrame(loop); })();
+  }
+
+  /* Gentle 3D tilt following the cursor */
+  const stage = $('#watchStage'), wrap = $('#watchWrap');
+  stage.addEventListener('pointermove', e => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    wrap.style.transform = `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg)`;
+  });
+  stage.addEventListener('pointerleave', () => { wrap.style.transform = 'perspective(900px)'; });
+
+  /* ---------------- Header: scroll state + spy + rail ---------------- */
+  const header = $('#siteHeader');
+  const navLinks = $$('.nav-link');
+  const rail = $('#tickRail'), railMarker = $('#railMarker');
+  const spySections = ['home', 'featured', 'collections', 'about', 'contact']
+    .map(id => document.getElementById(id)).filter(Boolean);
+
+  // Build tick rail
+  for (let i = 0; i <= 20; i++) {
+    const t = document.createElement('span');
+    t.className = 'rail-tick' + (i % 5 === 0 ? ' major' : '');
+    rail.appendChild(t);
+  }
+  rail.addEventListener('click', e => {
+    const r = rail.getBoundingClientRect();
+    const pct = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+    window.scrollTo({ top: pct * (document.documentElement.scrollHeight - innerHeight), behavior: 'smooth' });
+  });
+
+  function onScroll() {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    railMarker.style.top = (max > 0 ? (y / max) * 100 : 0) + '%';
+
+    let current = 'home';
+    for (const sec of spySections) {
+      if (sec.id !== 'home' && sec.getBoundingClientRect().top <= 160) current = sec.id;
+    }
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------- Mobile nav ---------------- */
+  const menuBtn = $('#mobileMenuBtn'), mDrawer = $('#mobileDrawer'), menuIcon = $('#menuToggleIcon');
+  menuBtn.addEventListener('click', () => {
+    mDrawer.classList.toggle('hidden');
+    menuIcon.className = mDrawer.classList.contains('hidden') ? 'fa-solid fa-bars text-sm' : 'fa-solid fa-xmark text-sm';
+  });
+  $$('.mobile-nav-link').forEach(a => a.addEventListener('click', () => {
+    mDrawer.classList.add('hidden');
+    menuIcon.className = 'fa-solid fa-bars text-sm';
+  }));
+
+  /* ---------------- Scroll reveals ---------------- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target, delay = parseInt(el.dataset.delay || '0', 10);
+      el.classList.add('active');
+      setTimeout(() => { el.classList.remove('reveal', 'active'); el.style.transitionDelay = ''; }, 950 + delay);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  $$('.reveal').forEach(el => {
+    if (el.dataset.delay) el.style.transitionDelay = el.dataset.delay + 'ms';
+    io.observe(el);
+  });
+
+  /* ---------------- Rendering: featured + catalog ---------------- */
+  function featHTML(p, big) {
+    return `
+    <article class="${big ? 'lg:col-span-2 lg:row-span-2' : ''} card-enter bg-porcelain border border-ink-900/12 rounded-[10px] overflow-hidden group hover:border-ink-900/30 hover:shadow-[0_20px_44px_-24px_rgba(27,25,18,0.4)] transition-all duration-300 flex flex-col" style="animation-delay:0ms">
+      <div class="relative overflow-hidden ${big ? 'h-[280px] sm:h-[360px] lg:h-[440px]' : 'h-[190px]'}">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" draggable="false" class="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-[900ms]">
+        <span class="absolute top-4 left-4 bg-lacquer-500 text-paper-50 font-mono text-[8.5px] tracking-[0.28em] uppercase px-2.5 py-1 rounded-[3px]">New</span>
+        <button class="heart-btn absolute top-4 right-4 w-9 h-9 rounded-full bg-porcelain/85 backdrop-blur border border-ink-900/12 grid place-items-center hover:border-lacquer-500/60 transition-colors" data-id="${p.id}" aria-label="Save ${p.name}">
+          <i class="${wish.has(p.id) ? 'fa-solid text-lacquer-500' : 'fa-regular text-ink-500'} fa-heart text-sm pointer-events-none"></i>
+        </button>
+      </div>
+      <div class="p-6 ${big ? 'sm:p-7' : ''} flex-1 flex flex-col">
+        <p class="font-mono text-[9px] tracking-[0.22em] uppercase text-ink-300">${CATS[p.cat].label} <span class="text-lacquer-500">&middot;</span> ${p.ref}</p>
+        <h3 class="font-display ${big ? 'text-3xl' : 'text-xl'} font-semibold text-ink-900 mt-2">${p.name}</h3>
+        <p class="text-[12.5px] font-light text-ink-500 mt-1.5">${p.blurb}</p>
+        <div class="mt-auto pt-5 mt-5 border-t border-ink-900/10 flex items-center justify-between gap-4">
+          <span class="font-mono text-[15px] font-medium text-ink-900">${money(p.price)}</span>
+          <button class="btn-add add-btn" data-id="${p.id}"><i class="fa-solid fa-bag-shopping text-[10px]"></i>Add to Bag</button>
+        </div>
+      </div>
+    </article>`;
+  }
+  $('#featuredGrid').innerHTML = featHTML(PRODUCTS[0], true) + featHTML(PRODUCTS[1]) + featHTML(PRODUCTS[2]);
+
+  let currentFilter = 'all';
+  function cardHTML(p, i) {
+    return `
+    <article class="card-enter bg-porcelain border border-ink-900/12 rounded-[10px] overflow-hidden group hover:border-ink-900/30 hover:shadow-[0_18px_40px_-22px_rgba(27,25,18,0.4)] transition-all duration-300" id="card-${p.id}" style="animation-delay:${i * 55}ms">
+      <div class="relative h-44 sm:h-48 overflow-hidden">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" draggable="false" class="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700">
+        ${p.isNew ? `<span class="absolute top-3 left-3 bg-lacquer-500 text-paper-50 font-mono text-[8px] tracking-[0.28em] uppercase px-2 py-0.5 rounded-[3px]">New</span>` : ''}
+        <button class="heart-btn absolute top-3 right-3 w-8 h-8 rounded-full bg-porcelain/85 backdrop-blur border border-ink-900/12 grid place-items-center hover:border-lacquer-500/60 transition-colors" data-id="${p.id}" aria-label="Save ${p.name}">
+          <i class="${wish.has(p.id) ? 'fa-solid text-lacquer-500' : 'fa-regular text-ink-500'} fa-heart text-[13px] pointer-events-none"></i>
+        </button>
+      </div>
+      <div class="p-4 sm:p-5">
+        <p class="font-mono text-[8.5px] sm:[9.5px] tracking-[0.2em] uppercase text-ink-300">${CATS[p.cat].label} <span class="text-lacquer-500">&middot;</span> ${p.ref}</p>
+        <h3 class="font-display text-lg sm:text-xl font-semibold text-ink-900 mt-1">${p.name}</h3>
+        <p class="text-[12px] font-light text-ink-500 mt-1 hidden sm:block">${p.blurb}</p>
+        <div class="mt-4 pt-4 border-t border-ink-900/10 flex items-center justify-between gap-3">
+          <span class="font-mono text-[13px] font-medium text-ink-900">${money(p.price)}</span>
+          <button class="btn-add add-btn" data-id="${p.id}"><i class="fa-solid fa-bag-shopping text-[10px]"></i>Add</button>
+        </div>
+      </div>
+    </article>`;
+  }
+  const ctaTile = i => `
+    <div class="card-enter rounded-[10px] border border-dashed border-ink-900/25 p-6 sm:p-7 flex flex-col justify-center" style="animation-delay:${i * 55}ms">
+      <p class="font-mono text-[9px] tracking-[0.3em] uppercase text-lacquer-600">Private viewing</p>
+      <h3 class="font-display text-2xl font-semibold text-ink-900 mt-3 leading-snug">The right piece<br><em class="italic">chooses you.</em></h3>
+      <p class="text-[12.5px] font-light text-ink-500 mt-3 leading-relaxed">Sit with the collection at our Fifth Avenue salon — espresso ours, time yours.</p>
+      <a href="#contact" class="mt-5 inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.25em] text-ink-900 font-medium group">
+        Book a viewing <i class="fa-solid fa-arrow-right text-[10px] text-lacquer-500 group-hover:translate-x-1 transition-transform"></i>
+      </a>
+    </div>`;
+
+  function renderGrid(animate = true) {
+    const list = PRODUCTS.filter(p => currentFilter === 'all' || p.cat === currentFilter);
+    let html = list.map((p, i) => cardHTML(p, i)).join('');
+    if (currentFilter === 'all') html += ctaTile(list.length);
+    const grid = $('#catalogGrid');
+    grid.innerHTML = html;
+    if (!animate) $$('.card-enter', grid).forEach(el => el.style.animation = 'none');
+    $('#filterCount').textContent = String(list.length).padStart(2, '0');
+    $('#filterLabel').textContent = currentFilter === 'all' ? 'All collections' : CATS[currentFilter].label;
+    $('#filterReset').classList.toggle('hidden', currentFilter === 'all');
+    syncHearts();
+  }
+
+  function setFilter(cat) {
+    currentFilter = cat;
+    $$('.cat-tile').forEach(t => t.classList.toggle('cat-active', t.dataset.cat === cat));
+    renderGrid(true);
+  }
+  $$('.cat-tile').forEach(t => t.addEventListener('click', () => {
+    const c = t.dataset.cat;
+    setFilter(c === currentFilter ? 'all' : c);
+  }));
+  $('#filterReset').addEventListener('click', () => setFilter('all'));
+
+  /* ---------------- Bag & wishlist ---------------- */
+  const bagBadge = $('#bagBadge'), wishBadge = $('#wishBadge');
+  function syncBadges() {
+    const n = cartCount();
+    bagBadge.textContent = n;
+    bagBadge.classList.toggle('hidden', n === 0);
+    wishBadge.textContent = wish.size;
+    wishBadge.classList.toggle('hidden', wish.size === 0);
+    $('#tabCart').textContent = `Bag — ${n}`;
+    $('#tabWish').textContent = `Saved — ${wish.size}`;
+  }
+  function syncHearts() {
+    $$('.heart-btn').forEach(btn => {
+      const on = wish.has(btn.dataset.id);
+      const ic = btn.querySelector('i');
+      ic.className = `${on ? 'fa-solid text-lacquer-500' : 'fa-regular text-ink-500'} fa-heart text-sm pointer-events-none`;
+      btn.style.borderColor = on ? 'rgba(168,46,36,.5)' : '';
+    });
+  }
+  function pop(el) { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+  function addToBag(id) {
+    const p = byId(id);
+    cart[id] = (cart[id] || 0) + 1;
+    save(); syncBadges(); renderDrawer();
+    pop(bagBadge);
+    showToast(`${p.name} added to your bag`);
+  }
+
+  /* Global delegation: add buttons + hearts */
+  document.addEventListener('click', e => {
+    const add = e.target.closest('.add-btn');
+    if (add) { addToBag(add.dataset.id); return; }
+    const h = e.target.closest('.heart-btn');
+    if (h) {
+      const id = h.dataset.id;
+      if (wish.has(id)) { wish.delete(id); showToast(`${byId(id).name} removed from saved`); }
+      else { wish.add(id); pop(wishBadge); showToast(`${byId(id).name} saved to wishlist`); }
+      save(); syncBadges(); syncHearts();
+      if (drawerOpen && drawerTab === 'wish') renderDrawer();
+    }
+  });
+
+  /* ---------------- Drawer ---------------- */
+  const drawer = $('#drawer'), overlay = $('#drawerOverlay');
+  const drawerBody = $('#drawerBody'), drawerFoot = $('#drawerFoot');
+  let drawerOpen = false, drawerTab = 'cart';
+
+  function openDrawer(tab) {
+    drawerTab = tab; drawerOpen = true;
+    renderDrawer(); syncBadges();
+    drawer.classList.add('open');
+    overlay.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    drawerOpen = false;
+    drawer.classList.remove('open');
+    overlay.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+  $('#drawerClose').addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  $('#bagBtn').addEventListener('click', () => openDrawer('cart'));
+  $('#wishBtn').addEventListener('click', () => openDrawer('wish'));
+  $('#tabCart').addEventListener('click', () => { drawerTab = 'cart'; renderDrawer(); });
+  $('#tabWish').addEventListener('click', () => { drawerTab = 'wish'; renderDrawer(); });
+
+  function emptyState(msg) {
+    return `
+    <div class="h-full flex flex-col items-center justify-center text-center py-16">
+      <div class="w-14 h-14 rounded-full border border-dashed border-ink-900/25 grid place-items-center text-ink-300"><i class="fa-regular fa-clock text-lg"></i></div>
+      <p class="font-display italic text-xl text-ink-700 mt-6">${msg}</p>
+      <button data-act="browse" class="mt-5 font-mono text-[10px] uppercase tracking-[0.25em] text-lacquer-600 font-medium hover:text-lacquer-400">Browse the collection</button>
+    </div>`;
+  }
+
+  function renderDrawer() {
+    $$('.drawer-tab').forEach(t => {
+      const active = (t.id === 'tabCart' && drawerTab === 'cart') || (t.id === 'tabWish' && drawerTab === 'wish');
+      t.classList.toggle('text-lacquer-600', active);
+      t.classList.toggle('border-lacquer-500', active);
+      t.classList.toggle('text-ink-500', !active);
+    });
+
+    if (drawerTab === 'cart') {
+      const entries = Object.entries(cart);
+      if (!entries.length) {
+        drawerBody.innerHTML = emptyState('Your bag is empty — the collection awaits.');
+        drawerFoot.innerHTML = '';
+        return;
+      }
+      drawerBody.innerHTML = entries.map(([id, q]) => {
+        const p = byId(id);
+        return `
+        <div class="flex gap-4 py-5 border-b border-ink-900/10">
+          <img src="${p.img}" alt="${p.name}" draggable="false" class="w-[72px] h-[72px] object-cover rounded-[8px] border border-ink-900/10">
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-[8.5px] tracking-[0.2em] uppercase text-ink-300">${p.ref}</p>
+            <p class="font-display text-lg font-semibold text-ink-900 leading-tight mt-0.5 truncate">${p.name}</p>
+            <div class="flex items-center justify-between mt-2.5">
+              <div class="flex items-center border border-ink-900/15 rounded-[6px] overflow-hidden">
+                <button class="w-7 h-7 grid place-items-center hover:bg-paper-100 text-ink-700" data-act="dec" data-id="${id}" aria-label="Decrease"><i class="fa-solid fa-minus text-[9px]"></i></button>
+                <span class="w-8 text-center font-mono text-xs text-ink-900">${q}</span>
+                <button class="w-7 h-7 grid place-items-center hover:bg-paper-100 text-ink-700" data-act="inc" data-id="${id}" aria-label="Increase"><i class="fa-solid fa-plus text-[9px]"></i></button>
+              </div>
+              <span class="font-mono text-[13px] text-ink-900">${money(p.price * q)}</span>
+            </div>
+          </div>
+          <button class="self-start w-7 h-7 grid place-items-center text-ink-300 hover:text-lacquer-600 transition-colors" data-act="rm" data-id="${id}" aria-label="Remove"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>`;
+      }).join('');
+      const total = entries.reduce((s, [id, q]) => s + byId(id).price * q, 0);
+      drawerFoot.innerHTML = `
+        <div class="flex items-baseline justify-between">
+          <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-500">Subtotal</span>
+          <span class="font-mono text-lg font-medium text-ink-900">${money(total)}</span>
+        </div>
+        <p class="mt-2 font-mono text-[9px] tracking-[0.12em] uppercase text-ink-300">Complimentary shipping · duties included · five-year warranty</p>
+        <button data-act="checkout" class="btn-ink w-full mt-5">Checkout — ${money(total)}</button>`;
+    } else {
+      const items = [...wish].map(byId).filter(Boolean);
+      if (!items.length) {
+        drawerBody.innerHTML = emptyState('Nothing saved yet — tap the heart on any piece.');
+        drawerFoot.innerHTML = '';
+        return;
+      }
+      drawerBody.innerHTML = items.map(p => `
+        <div class="flex gap-4 py-5 border-b border-ink-900/10">
+          <img src="${p.img}" alt="${p.name}" draggable="false" class="w-[72px] h-[72px] object-cover rounded-[8px] border border-ink-900/10">
+          <div class="flex-1 min-w-0">
+            <p class="font-mono text-[8.5px] tracking-[0.2em] uppercase text-ink-300">${p.ref}</p>
+            <p class="font-display text-lg font-semibold text-ink-900 leading-tight mt-0.5 truncate">${p.name}</p>
+            <div class="flex items-center justify-between mt-2.5">
+              <span class="font-mono text-[13px] text-ink-900">${money(p.price)}</span>
+              <button class="btn-add" data-act="wish-add" data-id="${p.id}"><i class="fa-solid fa-bag-shopping text-[10px]"></i>Add to Bag</button>
+            </div>
+          </div>
+          <button class="self-start w-7 h-7 grid place-items-center text-ink-300 hover:text-lacquer-600 transition-colors" data-act="wish-rm" data-id="${p.id}" aria-label="Remove"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>`).join('');
+      drawerFoot.innerHTML = '';
+    }
+  }
+
+  drawer.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if (!b) return;
+    const { act, id } = b.dataset;
+    switch (act) {
+      case 'inc': cart[id]++; break;
+      case 'dec': cart[id]--; if (cart[id] < 1) delete cart[id]; break;
+      case 'rm': delete cart[id]; break;
+      case 'wish-rm': wish.delete(id); save(); syncBadges(); syncHearts(); break;
+      case 'wish-add': addToBag(id); return;
+      case 'browse': closeDrawer(); $('#collections').scrollIntoView({ behavior: 'smooth' }); return;
+      case 'done': closeDrawer(); return;
+      case 'checkout': {
+        b.disabled = true;
+        b.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing';
+        setTimeout(() => {
+          const no = 'HX-' + Math.floor(1000 + Math.random() * 9000);
+          cart = {}; save(); syncBadges();
+          drawerBody.innerHTML = `
+            <div class="h-full flex flex-col items-center justify-center text-center py-14">
+              <div class="w-16 h-16 rounded-full bg-lacquer-500 text-paper-50 grid place-items-center shadow-lg"><i class="fa-solid fa-check text-xl"></i></div>
+              <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-lacquer-600 mt-7">Order ${no} confirmed</p>
+              <p class="font-display text-2xl font-semibold text-ink-900 mt-2">Thank you.</p>
+              <p class="text-[13px] font-light text-ink-500 mt-3 max-w-[26ch]">Our concierge will contact you to arrange delivery and sizing.</p>
+              <button data-act="done" class="mt-7 btn-line">Continue Browsing</button>
+            </div>`;
+          drawerFoot.innerHTML = '';
+        }, 1000);
+        return;
+      }
+    }
+    save(); syncBadges(); renderDrawer();
+  });
+
+  /* ---------------- Modals ---------------- */
+  function openModal(m) { m.classList.remove('closed'); requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('open'))); }
+  function closeModal(m) { m.classList.remove('open'); setTimeout(() => m.classList.add('closed'), 380); }
+
+  const searchModal = $('#searchModal'), accountModal = $('#accountModal'), infoModal = $('#infoModal');
+  const searchInput = $('#searchInput'), searchResults = $('#searchResults');
+
+  $('#searchBtn').addEventListener('click', () => { openModal(searchModal); setTimeout(() => searchInput.focus(), 80); });
+  $$('.search-close', searchModal).forEach(b => b.addEventListener('click', () => closeModal(searchModal)));
+  $('#userBtn').addEventListener('click', () => openModal(accountModal));
+  $$('.account-close', accountModal).forEach(b => b.addEventListener('click', () => closeModal(accountModal)));
+  $$('.info-close', infoModal).forEach(b => b.addEventListener('click', () => closeModal(infoModal)));
+
+  [searchModal, accountModal, infoModal].forEach(m => {
+    m.addEventListener('click', e => { if (e.target.closest('[data-close]')) closeModal(m); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      [searchModal, accountModal, infoModal].forEach(closeModal);
+      if (drawerOpen) closeDrawer();
+    }
+  });
+
+  /* ---------------- Search ---------------- */
+  function renderSearch() {
+    const q = searchInput.value.trim().toLowerCase();
+    if (!q) {
+      searchResults.innerHTML = `
+        <p class="px-3 pt-2 pb-1 font-mono text-[9px] uppercase tracking-[0.25em] text-ink-300">Popular searches</p>
+        <div class="flex flex-wrap gap-2 p-3">
+          ${['chrono', 'diver', 'gold', 'smart', 'limited'].map(w => `
+            <button data-q="${w}" class="px-3.5 py-1.5 rounded-full border border-ink-900/15 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-700 hover:border-lacquer-500 hover:text-lacquer-600 transition-colors">${w}</button>`).join('')}
+        </div>`;
+      return;
+    }
+    const list = PRODUCTS.filter(p => [p.name, p.ref, p.cat, p.blurb].join(' ').toLowerCase().includes(q));
+    if (!list.length) {
+      searchResults.innerHTML = `<p class="px-3 py-8 text-center font-display italic text-xl text-ink-300">No pieces match — try &ldquo;diver&rdquo; or &ldquo;gold&rdquo;.</p>`;
+      return;
+    }
+    searchResults.innerHTML = list.map(p => `
+      <div class="result-row flex items-center gap-4 p-3 rounded-[8px] hover:bg-paper-100 transition-colors">
+        <button class="flex items-center gap-4 flex-1 min-w-0 text-left" data-goto="${p.id}">
+          <img src="${p.img}" alt="${p.name}" draggable="false" class="w-14 h-14 object-cover rounded-[6px] border border-ink-900/10">
+          <div class="min-w-0">
+            <p class="font-display text-lg font-semibold text-ink-900 leading-tight truncate">${p.name}</p>
+            <p class="font-mono text-[9px] tracking-[0.2em] uppercase text-ink-300 mt-0.5">${CATS[p.cat].label} · ${p.ref}</p>
+          </div>
+        </button>
+        <span class="font-mono text-[12px] font-medium text-ink-900">${money(p.price)}</span>
+        <button class="btn-add shrink-0" data-add="${p.id}"><i class="fa-solid fa-bag-shopping text-[10px]"></i>Add</button>
+      </div>`).join('');
+  }
+  searchInput.addEventListener('input', renderSearch);
+  searchResults.addEventListener('click', e => {
+    const chip = e.target.closest('[data-q]');
+    if (chip) { searchInput.value = chip.dataset.q; renderSearch(); return; }
+    const add = e.target.closest('[data-add]');
+    if (add) { addToBag(add.dataset.add); return; }
+    const go = e.target.closest('[data-goto]');
+    if (go) gotoProduct(go.dataset.goto);
+  });
+  renderSearch();
+
+  function gotoProduct(id) {
+    closeModal(searchModal);
+    const p = byId(id);
+    if (currentFilter !== 'all' && p.cat !== currentFilter) setFilter('all');
+    setTimeout(() => {
+      const el = document.getElementById('card-' + id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('flash-card');
+        setTimeout(() => el.classList.remove('flash-card'), 1800);
+      }
+    }, 200);
+  }
+
+  /* ---------------- Account ---------------- */
+  $('#accountForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!e.target.reportValidity()) return;
+    const btn = $('#accSubmit');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Signing In';
+    setTimeout(() => {
+      btn.disabled = false; btn.innerHTML = 'Sign In';
+      closeModal(accountModal);
+      $('#userDot').classList.remove('hidden');
+      const name = ($('#accEmail').value.split('@')[0] || 'client');
+      showToast(`Welcome back, ${name.charAt(0).toUpperCase() + name.slice(1)}`);
+      e.target.reset();
+    }, 900);
+  });
+
+  /* ---------------- Footer info modal ---------------- */
+  const INFO = {
+    care: { title: 'Watch Care', body: `
+      <p><strong class="font-medium text-ink-900">Keep it moving.</strong> An automatic calibre stays healthiest when worn — or wound at the same hour each day, 15 gentle crown rotations.</p>
+      <p><strong class="font-medium text-ink-900">Away from magnets.</strong> Speakers, laptop docks and clasps can magnetise a movement and cost it seconds a day. Store the piece a hand's width from such company.</p>
+      <p><strong class="font-medium text-ink-900">Rinse, don't scrub.</strong> After salt water, hold a diver under a gentle fresh tap and pat dry. The crown stays locked at all times.</p>
+      <p><strong class="font-medium text-ink-900">Service every five years.</strong> Return it to any HOROS salon — the movement is disassembled, cleaned and re-oiled by the atelier, under warranty.</p>` },
+    privacy: { title: 'Privacy Policy', body: `
+      <p>HOROS collects only the details required to fulfil orders, service watches and answer enquiries — name, contact and purchase history. Nothing more, nothing sold on.</p>
+      <p>Bag and wishlist preferences stay on your own device. Emails are sent only to clients who join the newsletter, and every message carries a one-click exit.</p>` },
+    terms: { title: 'Terms of Service', body: `
+      <p>All pieces are delivered with an international five-year warranty and a numbered certificate. Insured worldwide shipping is complimentary; duties are included in the listed price.</p>
+      <p>Returns are accepted within 30 days on unworn pieces with the seal intact. Limited series and bespoke commissions are final sale, as the certificate is issued to one owner only.</p>` },
+  };
+  $$('.info-link').forEach(b => b.addEventListener('click', () => {
+    const d = INFO[b.dataset.info];
+    $('#infoTitle').textContent = d.title;
+    $('#infoBody').innerHTML = d.body;
+    openModal(infoModal);
+  }));
+
+  /* ---------------- Newsletter & contact ---------------- */
+  $('#nlForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = $('#nlInput').value.trim();
+    if (!/^\S+@\S+\.\S+$/.test(v)) { $('#nlMsg').textContent = 'Please enter a valid email.'; return; }
+    $('#nlMsg').textContent = 'Welcome to the circle — first letter arrives Friday.';
+    $('#nlInput').value = '';
+    showToast('Subscribed — welcome to the inner circle');
+  });
+
+  $('#contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!e.target.reportValidity()) return;
+    const btn = $('#contactSubmit');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending';
+    setTimeout(() => {
+      btn.disabled = false; btn.innerHTML = 'Send Message';
+      e.target.reset();
+      showToast('Message sent — our concierge replies within a day');
+    }, 1000);
+  });
+
+  /* ---------------- Init ---------------- */
+  renderGrid(false);
+  syncHearts();
+  syncBadges();
+  renderDrawer();
+</script>
+</body>
+</html>
